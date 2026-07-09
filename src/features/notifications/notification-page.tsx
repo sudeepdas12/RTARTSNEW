@@ -1,4 +1,4 @@
-import { Bell, CheckCircle2, Mail, MessageSquare, RefreshCw, XCircle } from "lucide-react";
+import { Bell, Mail, MessageSquare, RefreshCw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

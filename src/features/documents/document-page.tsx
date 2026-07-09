@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/toast-provider";
 import { useDocuments } from "@/lib/queries";
-import type { DocumentRecord } from "@/types/domain";
 
 export function DocumentPage() {
   const documents = useDocuments();

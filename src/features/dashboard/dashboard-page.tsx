@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDashboard, useWorkflowTasks } from "@/lib/queries";
-import { formatMoney } from "@/lib/utils";
+// import { formatMoney } from "@/lib/utils";
 import { Activity, AlertTriangle, Building2, CalendarCheck, Clock, TrendingUp } from "lucide-react";
 
 export function DashboardPage() {

@@ -11,7 +11,6 @@ import type {
   DashboardMetric,
   DebentureCalculation,
   DividendCalculation,
-  DocumentRecord,
   FeatureFlag,
   FormulaVersion,
   Holiday,
@@ -22,7 +21,6 @@ import type {
   PaymentItem,
   ReconciliationItem,
   TdsRule,
-  WorkflowComment,
   WorkflowConfig,
   WorkflowTask
 } from "@/types/domain";
@@ -437,9 +435,7 @@ export const workflowTasks: WorkflowTask[] = [
     comments: [
       { id: "C-1", taskId: "WF-1001", author: "Maker-01", authorId: "usr-maker", content: "Calculation completed. 14 warnings noted - all within tolerance.", createdAt: "2026-07-05T10:00:00Z" }
     ],
-    attachments: [
-      { id: "A-1", taskId: "WF-1001", fileName: "dividend-calculation-v3.2.xlsx", fileSize: 245000, uploadedBy: "Maker-01", uploadedAt: "2026-07-05T10:00:00Z" }
-    ]
+    attachments: []
   },
   {
     id: "WF-1002", module: "Payments", title: "Approve Bank Export PAY-078", description: "Authorize bank file export for NHPL dividend payment batch PAY-078.",
