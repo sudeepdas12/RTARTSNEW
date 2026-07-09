@@ -1,6 +1,6 @@
 import { AgGridReact } from "@ag-grid-community/react";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
-import type { ColDef, GetRowIdParams, GridReadyEvent, RowClassParams, RowDoubleClickedEvent, RowStyle } from "@ag-grid-community/core";
+import type { ColDef, GetRowIdParams, GridReadyEvent, RowClassParams, RowDoubleClickedEvent } from "@ag-grid-community/core";
 import { type MutableRefObject, useCallback, useRef, useState } from "react";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,7 +17,6 @@ export interface EnterpriseGridProps<T extends object> {
   onContextMenu?: (row: T, event: MouseEvent) => void;
   getRowId?: (params: GetRowIdParams<T>) => string;
   groupBy?: string[];
-  showGroupPanel?: boolean;
   showFooter?: boolean;
   footerRow?: Record<string, string | number>;
   pagination?: boolean;
@@ -41,7 +40,6 @@ export function EnterpriseGrid<T extends object>({
   onContextMenu,
   getRowId,
   groupBy,
-  showGroupPanel = false,
   showFooter = false,
   footerRow,
   pagination = true,
@@ -52,12 +50,8 @@ export function EnterpriseGrid<T extends object>({
   loading = false,
   maxHeightEnabled = false
 }: EnterpriseGridProps<T>) {
-  const internalGridRef = useRef<AgGridReact<T> | null>(null);
-  const gridRef = externalGridRef ?? internalGridRef;
-  const [gridReady, setGridReady] = useState(false);
-
+  const gridRef = externalGridRef ?? useRef<AgGridReact<T> | null>(null);
   const handleGridReady = useCallback((event: GridReadyEvent<T>) => {
-    setGridReady(true);
     event.api.sizeColumnsToFit();
   }, []);
 

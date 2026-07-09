@@ -5,7 +5,6 @@ import {
   Calculator,
   CheckCircle2,
   FileDown,
-  PlayCircle,
   Printer,
   XCircle
 } from "lucide-react";

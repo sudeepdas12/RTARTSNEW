@@ -3,11 +3,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   AlertTriangle,
   CheckCircle2,
-  ChevronRight,
   FileDown,
   PlayCircle,
   Printer,
-  RotateCcw,
   XCircle
 } from "lucide-react";
 import { useMemo, useState } from "react";

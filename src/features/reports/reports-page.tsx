@@ -1,4 +1,4 @@
-import { CalendarClock, Download, FileSpreadsheet, Heart, History, Printer, Search, Star } from "lucide-react";
+import { CalendarClock, Download, FileSpreadsheet, Heart, Printer, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

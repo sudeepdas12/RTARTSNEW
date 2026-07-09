@@ -2,9 +2,7 @@ import type { ColDef, ICellRendererParams } from "@ag-grid-community/core";
 import { 
   CheckCircle2, 
   Download, 
-  FileSpreadsheet, 
   GitCompare, 
-  History, 
   RotateCcw, 
   Search, 
   Upload, 
@@ -196,10 +194,6 @@ export function ReconciliationPage() {
                 <Button variant="secondary" className="h-8 text-xs" onClick={handleExport}>
                   <Download className="h-3.5 w-3.5" />
                   Excel
-                </Button>
-                <Button variant="secondary" className="h-8 text-xs" disabled>
-                  <History className="h-3.5 w-3.5" />
-                  History
                 </Button>
               </div>
             </div>

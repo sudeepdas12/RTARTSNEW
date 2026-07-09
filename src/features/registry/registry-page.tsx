@@ -1,4 +1,4 @@
-import type { ColDef, ICellRendererParams, ValueGetterParams } from "@ag-grid-community/core";
+import type { ColDef, ICellRendererParams } from "@ag-grid-community/core";
 import {
   Ban,
   Download,
@@ -17,7 +17,7 @@ import {
   UserX,
   X
 } from "lucide-react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { EnterpriseGrid } from "@/components/data-grid/enterprise-grid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -62,7 +62,6 @@ export function RegistryPage() {
   const [detailTab, setDetailTab] = useState("overview");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [confirmAction, setConfirmAction] = useState<"freeze" | "unfreeze" | "merge" | "transfer">("freeze");
-  const [contextMenuPos, setContextMenuPos] = useState<{ x: number; y: number } | null>(null);
   const [contextHolder, setContextHolder] = useState<HolderRecord | null>(null);
 
   const query = useMemo(() => {
@@ -242,7 +241,6 @@ export function RegistryPage() {
   const handleContextMenu = useCallback((row: HolderRecord, event: MouseEvent) => {
     event.preventDefault();
     setContextHolder(row);
-    setContextMenuPos({ x: event.clientX, y: event.clientY });
   }, []);
 
   const updateFilter = useCallback((key: keyof FilterState, value: string) => {
