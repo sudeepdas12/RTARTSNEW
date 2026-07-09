@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import * as mock from "@/lib/mockApi";
-import type { CycleSummary, WorkflowTask } from "@/types/domain";
+import type { WorkflowTask } from "@/types/domain";
 
 const useMockApi = import.meta.env.DEV || !import.meta.env.VITE_API_BASE_URL;
 
