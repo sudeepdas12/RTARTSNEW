@@ -1,0 +1,93 @@
+# ============================================
+# SEBON RTA/RTS - Full Stack Docker Compose
+# Services: Frontend (React) + Backend (Node.js) + Database (PostgreSQL)
+# ============================================
+
+version: "3.9"
+
+services:
+  # ---- Frontend (React + Vite + Nginx) ----
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sebon-rta-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - sebon-network
+    restart: unless-stopped
+
+  # ---- Backend API (Node.js/Express) ----
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: sebon-rta-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=sebon_rta
+      - DB_USER=sebon_admin
+      - DB_PASSWORD=${DB_PASSWORD:-sebon_secret_2026}
+      - CORS_ORIGIN=http://localhost:80
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sebon-network
+    restart: unless-stopped
+
+  # ---- PostgreSQL Database ----
+  postgres:
+    image: postgres:16-alpine
+    container_name: sebon-rta-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=sebon_rta
+      - POSTGRES_USER=sebon_admin
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-sebon_secret_2026}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./schema-v3-enterprise.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sebon_admin -d sebon_rta"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - sebon-network
+    restart: unless-stopped
+
+  # ---- pgAdmin (Database Management UI - Optional) ----
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: sebon-rta-pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL:-admin@sebon.gov.np}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD:-admin123}
+    depends_on:
+      - postgres
+    networks:
+      - sebon-network
+    restart: unless-stopped
+    profiles:
+      - tools  # Only starts with: docker compose --profile tools up
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  sebon-network:
+    driver: bridge

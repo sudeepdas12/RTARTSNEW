@@ -1,0 +1,30 @@
+# ============================================
+# SEBON RTA/RTS Backend API - Dockerfile
+# Node.js Express server with PostgreSQL
+# ============================================
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install PostgreSQL client for health checks
+RUN apk add --no-cache postgresql-client
+
+# Copy package files
+COPY package.json package-lock.json ./
+
+# Install production dependencies only
+RUN npm ci --frozen-lockfile --omit=dev
+
+# Copy server source
+COPY server.js app.js ./
+
+# Expose API port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
+
+# Run server
+CMD ["node", "server.js"]
