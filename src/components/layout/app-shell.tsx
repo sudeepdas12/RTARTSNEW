@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Bell, Command, Moon, Search, Sun, Workflow } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -56,7 +56,6 @@ export function AppShell() {
   const navigate = useNavigate();
   const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"));
   const [offline, setOffline] = useState(!navigator.onLine);
-  const [searchFocused, setSearchFocused] = useState(false);
   const [showShortcuts, setShowShortcuts] = useState(false);
 
   // Offline detection

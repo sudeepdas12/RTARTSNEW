@@ -4,10 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import type { DashboardMetric } from "@/types/domain";
 
 const toneMap = {
-  default: "info",
+  default: "default",
   success: "success",
   warning: "warning",
-  danger: "danger"
+  danger: "danger",
+  info: "info"
 } as const;
 
 export function MetricCard({ metric }: { metric: DashboardMetric }) {
